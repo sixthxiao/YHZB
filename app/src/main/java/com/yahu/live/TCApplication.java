@@ -37,6 +37,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
+ * 测试提交修改
  * Module:   TCApplication
  *
  * Function: 初始化 App 所需要的组件
