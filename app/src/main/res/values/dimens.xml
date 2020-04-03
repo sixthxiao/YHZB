@@ -1,0 +1,218 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!-- umeng -->
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="title">18sp</dimen>
+    <dimen name="sub_content">14sp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+
+    <!--大小-->
+    <!--h1-->
+    <!--h2-->
+    <!--h3-->
+    <!--h4-->
+    <!--h5-->
+    <dimen name="h5">12sp</dimen>
+    <!--h6-->
+    <dimen name="h6">14sp</dimen>
+    <!--h7-->
+    <dimen name="h7">15sp</dimen>
+    <!--h8-->
+    <dimen name="h8">16sp</dimen>
+    <!--h9-->
+    <dimen name="h9">17sp</dimen>
+    <!--h10-->
+    <dimen name="h10">18sp</dimen>
+    <!--h11-->
+
+    <dimen name="h12">20sp</dimen>
+
+    <!-- 飘星 -->
+    <dimen name="heart_anim_bezier_x_rand">50.0dp</dimen>
+    <dimen name="heart_anim_length">100.0dp</dimen>
+    <dimen name="heart_anim_length_rand">350.0dp</dimen>
+
+
+    <dimen name="live_btn_size">35dp</dimen>
+
+
+    <!-- AVSDK *******************************************************************************************************************************-->
+
+    <!-- 视频聊天中小窗口移动时的阈值 -->
+
+    <!-- AVSDK *******************************************************************************************************************************-->
+
+    <!-- UGC*******************************************************************************************************************************-->
+    <!-- UGC*******************************************************************************************************************************-->
+    <!--字体大小-->
+    <dimen name="text_size_00">18sp</dimen>
+    <dimen name="text_size_01">16sp</dimen>
+    <dimen name="text_size_02">14sp</dimen>
+    <dimen name="text_size_03">12sp</dimen>
+    <dimen name="text_size_04">10sp</dimen>
+
+    <dimen name="actionbar_height">48dp</dimen>
+
+
+    <dimen name="heart_anim_init_x">50.0dp</dimen>
+    <dimen name="heart_anim_init_y">25.0dp</dimen>
+    <dimen name="heart_anim_x_point_factor">30.0dp</dimen>
+
+    <dimen name="heart_size_height">27.3dp</dimen>
+    <dimen name="heart_size_width">32.5dp</dimen>
+
+    <dimen name="prediction_image_border_width">2dp</dimen>
+    <dimen name="prediction_image_border_width_norm">0dp</dimen>
+    <dimen name="zero_px">0px</dimen>
+    <dimen name="header_bottom_line_height">1dip</dimen>
+    <dimen name="header_bottom_line_height_half">0.5dip</dimen>
+    <dimen name="dp_0">0dip</dimen>
+
+    <dimen name="dp_1">1.0dip</dimen>
+    <dimen name="dp_2">2.0dip</dimen>
+
+    <dimen name="dp_3">3.0dip</dimen>
+    <dimen name="dp_4">4.0dip</dimen>
+    <dimen name="dp_5">5.0dip</dimen>
+    <dimen name="dp_6">6.0dip</dimen>
+    <dimen name="dp_7">7.0dip</dimen>
+
+    <dimen name="dp_8">8.0dip</dimen>
+    <dimen name="dp_9">9.0dip</dimen>
+    <dimen name="dp_10">10.0dip</dimen>
+    <dimen name="dp_11">11.0dip</dimen>
+    <dimen name="dp_12">12.0dip</dimen>
+
+    <dimen name="dp_13">13.0dip</dimen>
+    <dimen name="dp_14">14.0dip</dimen>
+    <dimen name="dp_15">15.0dip</dimen>
+    <dimen name="dp_16">16.0dip</dimen>
+    <dimen name="dp_17">17.0dip</dimen>
+    <dimen name="dp_18">18.0dip</dimen>
+    <dimen name="dp_19">19.0dip</dimen>
+    <dimen name="dp_20">20.0dip</dimen>
+    <dimen name="dp_21">21.0dip</dimen>
+    <dimen name="dp_22">22.0dip</dimen>
+    <dimen name="dp_23">23.0dip</dimen>
+    <dimen name="dp_24">24.0dp</dimen>
+    <dimen name="dp_25">25.0dip</dimen>
+    <dimen name="dp_26">26.0dip</dimen>
+    <dimen name="dp_27">27.0dip</dimen>
+
+    <dimen name="dp_28">28.0dip</dimen>
+    <dimen name="dp_29">29.0dip</dimen>
+    <dimen name="dp_30">30.0dip</dimen>
+    <dimen name="dp_31">31.0dip</dimen>
+    <dimen name="dp_32">32.0dip</dimen>
+    <dimen name="dp_33">33.0dip</dimen>
+    <dimen name="dp_34">34.0dip</dimen>
+    <dimen name="dp_35">35.0dip</dimen>
+    <dimen name="dp_36">36.0dip</dimen>
+    <dimen name="dp_37">37.0dip</dimen>
+    <dimen name="dp_38">38.0dip</dimen>
+    <dimen name="dp_39">39.0dip</dimen>
+    <dimen name="dp_40">40.0dip</dimen>
+    <dimen name="dp_41">41.0dip</dimen>
+    <dimen name="dp_42">42.0dip</dimen>
+    <dimen name="dp_43">43.0dip</dimen>
+    <dimen name="dp_44">44.0dip</dimen>
+    <dimen name="dp_45">45.0dip</dimen>
+    <dimen name="dp_46">46.0dip</dimen>
+    <dimen name="dp_47">47.0dip</dimen>
+    <dimen name="dp_48">48.0dip</dimen>
+    <dimen name="dp_49">49.0dip</dimen>
+    <dimen name="dp_50">50.0dip</dimen>
+    <dimen name="dp_51">51.0dip</dimen>
+    <dimen name="dp_52">52.0dip</dimen>
+    <dimen name="dp_53">53.0dip</dimen>
+    <dimen name="dp_54">54.0dip</dimen>
+    <dimen name="dp_55">55.0dip</dimen>
+    <dimen name="dp_56">56.0dip</dimen>
+    <dimen name="dp_57">57.0dip</dimen>
+    <dimen name="dp_58">58.0dip</dimen>
+    <dimen name="dp_59">59.0dip</dimen>
+    <dimen name="dp_60">60.0dip</dimen>
+    <dimen name="dp_61">61.0dip</dimen>
+    <dimen name="dp_62">62.0dip</dimen>
+    <dimen name="dp_63">63.0dip</dimen>
+    <dimen name="dp_64">64.0dip</dimen>
+    <dimen name="dp_65">65.0dip</dimen>
+    <dimen name="dp_66">66.0dip</dimen>
+    <dimen name="dp_67">67.0dip</dimen>
+    <dimen name="dp_68">68.0dip</dimen>
+    <dimen name="dp_69">69.0dip</dimen>
+    <dimen name="dp_70">70.0dip</dimen>
+    <dimen name="dp_71">71.0dip</dimen>
+    <dimen name="dp_72">72.0dip</dimen>
+    <dimen name="dp_73">73.0dip</dimen>
+    <dimen name="dp_74">74.0dip</dimen>
+    <dimen name="dp_75">75.0dip</dimen>
+    <dimen name="dp_76">76.0dip</dimen>
+    <dimen name="dp_77">77.0dip</dimen>
+    <dimen name="dp_78">78.0dip</dimen>
+    <dimen name="dp_79">79.0dip</dimen>
+    <dimen name="dp_80">80.0dip</dimen>
+    <dimen name="dp_81">81.0dip</dimen>
+    <dimen name="dp_82">82.0dip</dimen>
+    <dimen name="dp_83">83.0dip</dimen>
+    <dimen name="dp_84">84.0dip</dimen>
+    <dimen name="dp_85">85.0dip</dimen>
+    <dimen name="dp_86">86.0dip</dimen>
+    <dimen name="dp_87">87.0dip</dimen>
+    <dimen name="dp_88">88.0dip</dimen>
+    <dimen name="dp_89">89.0dip</dimen>
+    <dimen name="dp_90">90.0dip</dimen>
+    <dimen name="dp_91">91.0dip</dimen>
+    <dimen name="dp_92">92.0dip</dimen>
+    <dimen name="dp_93">93.0dip</dimen>
+    <dimen name="dp_94">94.0dip</dimen>
+    <dimen name="dp_95">95.0dip</dimen>
+    <dimen name="dp_96">96.0dip</dimen>
+    <dimen name="dp_97">97.0dip</dimen>
+    <dimen name="dp_98">98.0dip</dimen>
+    <dimen name="dp_99">99.0dip</dimen>
+    <dimen name="dp_100">100.0dip</dimen>
+    <dimen name="dp_103">103.0dip</dimen>
+    <dimen name="dp_105">105.0dip</dimen>
+    <dimen name="dp_110">110.0dip</dimen>
+    <dimen name="dp_115">115.0dip</dimen>
+    <dimen name="dp_120">120.0dip</dimen>
+    <dimen name="dp_125">125.0dip</dimen>
+    <dimen name="dp_126">126.0dip</dimen>
+    <dimen name="dp_130">130.0dip</dimen>
+    <dimen name="dp_140">140.0dip</dimen>
+    <dimen name="dp_142">142.0dip</dimen>
+    <dimen name="dp_145">145.0dip</dimen>
+    <dimen name="dp_150">150.0dip</dimen>
+    <dimen name="dp_157">157.0dip</dimen>
+    <dimen name="dp_160">160.0dip</dimen>
+    <dimen name="dp_170">170.0dip</dimen>
+    <dimen name="dp_180">180.0dip</dimen>
+    <dimen name="dp_182">182.0dip</dimen>
+    <dimen name="dp_188">188.0dip</dimen>
+    <dimen name="dp_190">190.0dip</dimen>
+    <dimen name="dp_200">200.0dip</dimen>
+    <dimen name="dp_210">210.0dip</dimen>
+    <dimen name="dp_220">220.0dip</dimen>
+    <dimen name="dp_223">223.0dip</dimen>
+    <dimen name="dp_235">235.0dip</dimen>
+    <dimen name="dp_250">250.0dip</dimen>
+    <dimen name="dp_260">260.0dip</dimen>
+    <dimen name="dp_280">280.0dip</dimen>
+    <!--textsize-->
+    <dimen name="sp_10">10sp</dimen>
+    <dimen name="sp_11">11sp</dimen>
+    <dimen name="sp_12">12sp</dimen>
+    <dimen name="sp_13">13sp</dimen>
+    <dimen name="sp_14">14sp</dimen>
+    <dimen name="sp_16">16sp</dimen>
+    <dimen name="sp_18">18sp</dimen>
+    <dimen name="sp_21">21sp</dimen>
+    <dimen name="sp_24">24sp</dimen>
+    <dimen name="sp_64">64sp</dimen>
+</resources>

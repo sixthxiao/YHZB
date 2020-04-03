@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!--广告位-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_157"
+        android:gravity="center_horizontal">
+
+
+        <com.zhouwei.mzbanner.MZBannerView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:canLoop="true"
+            android:layout_centerHorizontal="true"
+            app:middle_page_cover="false"
+            app:open_mz_mode="false" />
+
+        <LinearLayout
+            android:id="@+id/ll_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:visibility="visible"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/sel_home_banner_indicator" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!--菜单-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/dp_24"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/first_new_good"
+            android:drawableTop="@mipmap/icon_demo"
+            android:tag="icon_search_new"
+            android:textColor="@color/main_text"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/sp_12"
+            android:text="菜单标题" />
+
+
+
+        <TextView
+            android:id="@+id/switch_to_live"
+            android:textColor="@color/main_text"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="onFunctionClick"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/sp_12"
+            android:drawableTop="@mipmap/icon_demo"
+            android:text="菜单标题" />
+
+
+        <TextView
+            android:textColor="@color/main_text"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="onFunctionClick"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/sp_12"
+            android:visibility="gone"
+            android:drawableTop="@mipmap/icon_demo"
+            android:tag="icon_search_jade"
+            android:text="菜单标题" />
+
+
+        <TextView
+            android:id="@+id/auction_0home"
+            android:textColor="@color/main_text"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="onFunctionClick"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/sp_12"
+            android:drawableTop="@mipmap/icon_demo"
+            android:tag="icon_search_fancy"
+            android:text="菜单标题" />
+
+        <TextView
+            android:textColor="@color/main_text"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="onFunctionClick"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/sp_12"
+            android:drawableTop="@mipmap/icon_demo"
+            android:tag="icon_search_fancy"
+            android:text="菜单标题" />
+
+    </LinearLayout>
+
+</LinearLayout>
+

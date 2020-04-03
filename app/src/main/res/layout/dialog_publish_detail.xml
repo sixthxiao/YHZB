@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorDarkTransparentGray"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30">
+
+        <ImageView
+            android:id="@+id/anchor_btn_cancel"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/live_close"/>
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_150"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher"
+            app:riv_border_color="#ffffff"
+            app:riv_border_width="0px"
+            app:riv_corner_radius="@dimen/dp_200"
+            tools:ignore="MissingConstraints" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:gravity="center"
+        android:text="@string/live_end_tips"
+        android:textColor="@color/white"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- 获得金币 -->
+            <TextView
+                android:id="@+id/tv_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="698856"
+                android:textColor="#ffeb3b"
+                android:textSize="@dimen/sp_16" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:text="获得金币"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sub_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- 直播时长 -->
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="1:30:29"
+                android:textColor="#ffeb3b"
+                android:textSize="@dimen/sp_16" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:text="@string/live_time_tips"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sub_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- 观看人数 -->
+            <TextView
+                android:id="@+id/tv_members"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="1:30:29"
+                android:textColor="#ffeb3b"
+                android:textSize="@dimen/sp_16" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:text="@string/live_members_tips"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sub_content" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <!-- 获赞数量 -->
+    <TextView
+        android:id="@+id/tv_admires"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/live_admires_tips"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sub_content" />
+
+    <TextView
+        android:layout_width="225dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_return_home_page"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/btn_return_home"
+        android:visibility="gone"
+        android:textColor="@color/colorLight"
+        android:textSize="@dimen/title" />
+
+
+</LinearLayout>

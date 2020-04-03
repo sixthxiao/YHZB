@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.pinguo-zhouwei:MZBannerView:v2.0.2@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0a4244a5dc12e0fb15642eab468fc3a9/jetified-MZBannerView-v2.0.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0a4244a5dc12e0fb15642eab468fc3a9/jetified-MZBannerView-v2.0.2/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.pinguo-zhouwei/MZBannerView/v2.0.2/11b074139420453ae93d4f61b6d54d0a92cdfd81/MZBannerView-v2.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

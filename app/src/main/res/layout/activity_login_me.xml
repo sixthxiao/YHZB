@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_centerHorizontal="true"
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+    <ImageView
+        android:id="@+id/sao"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="right|top"
+        android:src="@drawable/sys_black"/>
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginTop="40dp"
+        app:riv_border_color="#ffffff"
+        app:riv_border_width="0px"
+        app:riv_corner_radius="100dp"
+        tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/pager_tab"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        app:tabIndicatorColor="#000000"
+        app:tabIndicatorFullWidth="false"
+        app:tabSelectedTextColor="#000000"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager_pager"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/login_line" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="快捷登录"
+            android:textSize="14sp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#EFEFEF" />
+
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/login_line" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="30dp">
+
+        <LinearLayout
+            android:id="@+id/login_wechat"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:background="@mipmap/login_circal"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginRight="30dp"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/login_wechat"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:background="@mipmap/login_circal"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginRight="30dp"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/login_weibo"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:background="@mipmap/login_circal"
+            android:orientation="horizontal"
+            android:gravity="center"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/login_qq"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

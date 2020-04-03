@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.tencent.tpns:xiaomi:1.1.5.4-release@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/abf60e080d94cc0557674eef8cd6fa4a/jetified-xiaomi-1.1.5.4-release/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/abf60e080d94cc0557674eef8cd6fa4a/jetified-xiaomi-1.1.5.4-release/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/abf60e080d94cc0557674eef8cd6fa4a/jetified-xiaomi-1.1.5.4-release/jars/libs/xm4tpns1.1.5.4.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tencent.tpns/xiaomi/1.1.5.4-release/8d6992f61fdfe7576cb2a70c63bec6cabba990a7/xiaomi-1.1.5.4-release-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tencent.tpns/xiaomi/1.1.5.4-release/8d6992f61fdfe7576cb2a70c63bec6cabba990a7/xiaomi-1.1.5.4-release-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

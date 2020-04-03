@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_empty"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:visibility="visible"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_marginLeft="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:src="@mipmap/icon_empty" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="暂无数据"
+        android:textColor="@color/main_text"
+        android:textSize="@dimen/text_size_02" />
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_reload"
+        android:gravity="center_vertical"
+        android:layout_marginTop="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_reload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_reload"/>
+
+        <TextView
+            android:layout_marginLeft="4dp"
+            android:id="@+id/tv_reload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="点击重新加载"
+            android:textColor="@color/main_text"
+            android:textSize="@dimen/text_size_01" />
+    </LinearLayout>
+</LinearLayout>

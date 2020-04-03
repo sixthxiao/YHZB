@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/load_more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:indicatorColor="@color/primary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/main_text"
+            android:text="加载中"
+            android:textSize="@dimen/text_size_02" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/load_fail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:textColor="@color/main_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="加载失败，请检查网络"
+            android:textSize="@dimen/text_size_02" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/load_end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="1dp"
+            android:background="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="我也是有底线的"
+            android:textColor="@color/main_text"
+            android:textSize="@dimen/text_size_02" />
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="1dp"
+            android:background="@color/white" />
+
+    </LinearLayout>
+</FrameLayout>

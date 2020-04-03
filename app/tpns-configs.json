@@ -1,0 +1,13 @@
+{
+    "tpns": {
+        "access_id": "1500006275",
+        "access_key": "AP72CJWYTYSM"
+    },
+    "com.yahu.live": {
+        "channel": {
+            "enable": false
+        }
+    },
+    "debug": false,
+    "version": "1.1.5.4"
+}

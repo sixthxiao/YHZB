@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.tencent.jg:jg:1.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a1f2aaf87c662f72016284548499393a/jetified-jg-1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a1f2aaf87c662f72016284548499393a/jetified-jg-1.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a1f2aaf87c662f72016284548499393a/jetified-jg-1.1/jars/libs/jg_filter_sdk_1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tencent.jg/jg/1.1/c6c75bbd4b0da9bd7a737f21e5ddf0cf8db82cef/jg-1.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tencent.jg/jg/1.1/26d6ee3e86ec6e03eff7eaf52fcdf6e5a77d6139/jg-1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

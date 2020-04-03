@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/top_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_45"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:paddingLeft="@dimen/dp_18"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingRight="@dimen/dp_18"
+        android:paddingBottom="@dimen/dp_5"
+        android:src="@drawable/back" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:ellipsize="end"
+        android:maxWidth="200dp"
+        android:singleLine="true"
+        android:textColor="@color/color_282828"
+        android:textSize="@dimen/sp_17"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp_10"
+        android:padding="@dimen/dp_5"
+        android:text="菜单"
+        android:textColor="@color/color_41ce8c"
+        android:textSize="@dimen/sp_15"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/rightImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp_10"
+        android:padding="@dimen/dp_5" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0_5"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_bebebe" />
+</RelativeLayout>

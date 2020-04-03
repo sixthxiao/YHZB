@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/guide_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:id="@+id/guide_ll_point"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"/>
+
+    <ImageButton
+        android:id="@+id/guide_ib_start"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/guide_ll_point"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:background="#00000000"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/skip"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="15dp"
+        android:background="#00000000"
+        android:visibility="visible" />
+</RelativeLayout>

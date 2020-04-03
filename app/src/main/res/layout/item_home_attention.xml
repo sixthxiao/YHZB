@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_item"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_98"
+    android:layout_marginLeft="@dimen/dp_10"
+    android:layout_marginRight="@dimen/dp_10"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/iv"
+        android:layout_width="117dp"
+        android:layout_height="@dimen/dp_80"
+        android:layout_marginRight="@dimen/dp_10"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/list_image"
+        app:riv_corner_radius="9dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/shiping"
+            android:drawablePadding="@dimen/dp_5"
+            android:text="百家讲师-丽丽的直播间"
+            android:textColor="#000000"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:drawableLeft="@mipmap/list_live_user"
+            android:drawablePadding="@dimen/dp_5"
+            android:text="百家讲师-丽丽"
+            android:textColor="#999999"
+            android:textSize="14dp" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:drawableLeft="@mipmap/youxi"
+                android:drawablePadding="@dimen/dp_5"
+                android:text="百家讲师-丽丽"
+                android:textColor="#666666"
+                android:textSize="14dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_5"
+                android:drawableLeft="@mipmap/dianzan"
+                android:drawablePadding="@dimen/dp_5"
+                android:ellipsize="end"
+                android:maxLength="8"
+                android:text="253645645896"
+                android:textColor="#999999"
+                android:textSize="14dp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <!-- 屏幕右侧外边部分，正常时在屏幕中处于不可见 -->
+    <LinearLayout
+        android:id="@+id/ll_hidden"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:background="#ff0000"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_item_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+</LinearLayout>

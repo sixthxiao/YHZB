@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BaseLibrary</string>
+    <string name="aa">请先设置以下权限才能使用该功能:\n\n%1$s</string>
+    <string name="confirm">确认</string>
+</resources>

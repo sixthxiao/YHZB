@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <com.yahu.live.view.NoScrollViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="52dp" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/main_tab"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_alignParentBottom="true"
+        android:padding="0dp"
+        app:tabIndicatorHeight="0dp"
+        app:tabPadding="0dp"
+        app:tabSelectedTextColor="@color/main_color"
+        app:tabTextColor="#505050"
+        app:tabBackground="@android:color/transparent"
+        app:tabRippleColor="@android:color/transparent">
+
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:id="@+id/tabItem1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="首页"-->
+<!--            android:paddingBottom="-10dp"-->
+<!--            android:icon="@drawable/ic_home_homepage"/>-->
+
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:id="@+id/tabItem2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="直播"-->
+<!--            android:icon="@drawable/ic_home_live"/>-->
+
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="关注"-->
+<!--            android:icon="@drawable/ic_home_attention"/>-->
+
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:text="视频"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:icon="@drawable/ic_home_video"/>-->
+
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:text="我的"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:icon="@drawable/ic_home_me"/>-->
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+
+</RelativeLayout>

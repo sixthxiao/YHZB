@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.tencent.tpns:meizu:1.1.5.4-release@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/89af2085e13db0cfc25ba10fa2cd798f/jetified-meizu-1.1.5.4-release/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/89af2085e13db0cfc25ba10fa2cd798f/jetified-meizu-1.1.5.4-release/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/89af2085e13db0cfc25ba10fa2cd798f/jetified-meizu-1.1.5.4-release/jars/libs/mz4tpns1.1.5.4.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tencent.tpns/meizu/1.1.5.4-release/beaa063e41218ed8ffef540bbb713e775f946338/meizu-1.1.5.4-release-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tencent.tpns/meizu/1.1.5.4-release/beaa063e41218ed8ffef540bbb713e775f946338/meizu-1.1.5.4-release-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

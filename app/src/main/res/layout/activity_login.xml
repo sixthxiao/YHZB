@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_login_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingTop="32dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin">
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/cloud_logo" />
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_logo"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/activity_login_username"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_username"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:hint="@string/activity_login_username_hint"
+            android:inputType="textEmailAddress"
+            android:maxLength="24"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/colorTextG4"
+            android:textColorHint="@color/colorTextG4"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_username"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/activity_login_password"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_password"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:hint="@string/activity_login_password_hint"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/colorTextG4"
+            android:textColorHint="@color/colorTextG4"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_password"
+            android:layout_alignEnd="@+id/btn_login"
+            android:layout_alignRight="@+id/btn_login"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:padding="10dp"
+            android:text="@string/activity_login_register"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_register"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/btn_login"
+            android:clickable="true"
+            android:padding="0dp"
+            android:text="@string/activity_login_login"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignTop="@+id/btn_login"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

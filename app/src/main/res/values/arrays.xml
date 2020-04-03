@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--用户头衔名字列表-->
+    <string-array name="grade_name_list">
+
+        <item>玩转帝王</item>
+        <item>亿万大佬</item>
+
+    </string-array>
+
+
+    <!--用户进入直播间提示前面的图片或gif-->
+    <string-array name="grade_icon_list_gif">
+
+        <item>inco_gif07</item>
+        <item>inco_gif08</item>
+
+    </string-array>
+
+
+</resources>

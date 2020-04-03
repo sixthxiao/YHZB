@@ -1,0 +1,121 @@
+<resources>
+    <string name="app_name" translatable="false">亚虎直播</string>
+
+    <!-- login re fragment-->
+
+
+    <string name="btn_take_photo" translatable="false">拍照</string>
+    <string name="btn_pic_photo" translatable="false">从手机相册选择</string>
+    <string name="btn_return_home" translatable="false">返回首页</string>
+    <string name="btn_return" translatable="false">返回</string>
+    <string name="btn_cancel" translatable="false">取消</string>
+    <string name="btn_sure" translatable="false">确定</string>
+
+
+    <!--loginActivity -->
+    <string name="activity_login_login" translatable="false">登录</string>
+    <string name="activity_login_register" translatable="false">新用户注册</string>
+    <string name="activity_login_username" translatable="false">账号昵称</string>
+    <string name="activity_login_username_hint" translatable="false">输入用户名</string>
+    <string name="activity_login_password" translatable="false">账号密码</string>
+    <string name="activity_login_password_hint" translatable="false">输入密码</string>
+    <!--loginActivity -->
+
+    <!--registerActivity -->
+    <string name="activity_register_title" translatable="false">注册账号</string>
+    <string name="activity_register_register" translatable="false">注册</string>
+    <string name="activity_register_username" translatable="false">账号昵称</string>
+    <string name="activity_register_username_hint" translatable="false">用户名为小写字母、数字、下划线</string>
+    <string name="activity_register_password" translatable="false">账号密码</string>
+    <string name="activity_register_password_hint" translatable="false">用户密码为8~16位个字符</string>
+    <string name="activity_register_password_verify" translatable="false">密码确认</string>
+    <string name="activity_register_password_verify_hint" translatable="false">确认密码</string>
+    <string name="activity_register_return" translatable="false">返回</string>
+    <!--registerActivity -->
+
+    <!-- permission check-->
+    <string name="float_window_not_allow" translatable="false">悬浮窗权限未开启 请在应用-权限中打开悬浮窗权限</string>
+
+    <string name="dialog_input_text_hint" translatable="false">说点啥呗！</string>
+    <string name="dialog_input_gift_hint" translatable="false">送点啥呗！</string>
+
+    <string name="dialog_selectSex" translatable="false">请选择</string>
+    <!-- live fragment-->
+    <string name="live_unknown" translatable="false">不显示地理位置</string>
+
+    <!-- publish activity-->
+    <string name="activity_publish_beauty" translatable="false">美颜效果</string>
+    <string name="activity_publish_white" translatable="false">美白效果</string>
+
+    <!-- live play -->
+    <string name="send" translatable="false">发送</string>
+    <string name="send_gift" translatable="false">赠送</string>
+    <string name="live_end_tips" translatable="false">直播已结束!</string>
+    <string name="live_time_tips" translatable="false">直播时长</string>
+    <string name="live_members_tips" translatable="false">观看人数</string>
+    <string name="live_admires_tips" translatable="false">获赞数量</string>
+
+    <!-- pushstream -->
+
+    <!-- msgadapter -->
+    <item type="id" name="tag_first"></item>
+    <item type="id" name="tag_second"></item>
+
+
+    <!-- userinfo fragment-->
+    <string name="userinfo_title" translatable="false">编辑个人信息</string>
+    <string name="userinfo_head" translatable="false">头像</string>
+    <string name="userinfo_nickname" translatable="false">昵称</string>
+    <string name="userinfo_sex" translatable="false">性别</string><![CDATA[
+    string>
+
+    ]]>
+    <string name="userinfo_sex_female" translatable="false">女</string>
+    <string name="userinfo_sex_male" translatable="false">男</string>
+
+    <string name="app_about" translatable="false">关于小直播</string>
+    <string name="app_set" translatable="false">编辑个人信息</string>
+    <string name="btn_login_out" translatable="false">退出登录</string>
+
+    <!-- set -->
+
+    <!-- icon_edit -->
+
+
+    <!-- fragment publish -->
+    <string name="publish_wait_uploading" translatable="false">请等待封面上传完成</string>
+    <string name="text_publish" translatable="false">开始直播</string>
+    <string name="text_live_preview" translatable="false">发布直播</string>
+    <string name="text_live_title_input" translatable="false">请输入直播间标题</string>
+    <string name="text_live_close_lbs" translatable="false">不显示地理位置</string>
+    <string name="text_live_location" translatable="false">正在定位中</string>
+    <string name="text_live_lbs_fail" translatable="false">定位失败</string>
+    <string name="text_live_add_title_tips" translatable="false">给你的直播设置一个满意的封面</string>
+    <string name="tip_no_permission" translatable="false">权限不足</string>
+
+
+    <!--registerActivity  loginActivity-->
+    <string name="technical_support" translatable="false">如何获取技术支持服务？</string>
+    <string name="follow_public_number" translatable="false">关注公众号“腾讯云视频”</string>
+    <string name="send_msg_to_public_number" translatable="false">给公众号发送“小直播”</string>
+
+    <!-- userinfo fragment-->
+    <string name="get_technical_support" translatable="false">获取技术支持服务</string>
+    <string name="download_sdk" translatable="false"><a href='https://cloud.tencent.com/document/product/454/7873'>下载 SDK</a></string>
+    <string name="product_introduction" translatable="false"><a href='https://cloud.tencent.com/product/mlvb'>产品介绍</a></string>
+
+    <string name="follow_and_send_msg_to_public_number" translatable="false">关注公众号“腾讯云视频”\n给公众号发送“小直播”</string>
+
+    <string name="txt_pay_success" translatable="false">支付成功</string>
+    <string name="txt_pay_fail" translatable="false">支付失败</string>
+    <string name="txt_pay_cancel" translatable="false">支付已取消</string>
+    <string name="txt_pay_error" translatable="false">发生未知错误</string>
+
+    <string name="permission_camera" translatable="false">摄像头</string>
+    <string name="permission_storage" translatable="false">文件</string>
+    <string name="permission_accounts" translatable="false">信息</string>
+    <string name="permission_phone" translatable="false">状态</string>
+    <string name="permission_location" translatable="false">定位</string>
+    <string name="permission_audio" translatable="false">录音</string>
+
+</resources>
