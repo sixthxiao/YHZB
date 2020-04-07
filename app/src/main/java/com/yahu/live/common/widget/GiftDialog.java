@@ -39,7 +39,7 @@ import java.util.ArrayList;
 
 
 /**
- * Module:   TCInputTextMsgDialog
+ * Module:   GiftDialog
  *
  * 礼物弹窗
  *

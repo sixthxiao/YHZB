@@ -32,16 +32,15 @@ import java.util.List;
 
 public class LiveGiftFragment extends NoBindFragment {
 
-    private int images[] = {R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-            R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
+    private int images[] = {R.mipmap.gift_gaobai, R.mipmap.gift_aixin,
+            R.mipmap.gift_feichuan, R.mipmap.gift_xiaoxing, R.mipmap.gift_zan,
+            R.mipmap.gift_btang, R.mipmap.gift_chaopao, R.mipmap.gift_tq};
     private GridView mGridView;
     private LiveGiftAdapter liveGiftAdapter;
-    private String[] titles = new String[]{"礼物标题", "礼物标题", "礼物标题", "礼物标题",
-            "礼物标题", "礼物标题", "礼物标题", "礼物标题"};
-    private String[] values = new String[]{"1000金币", "1000金币", "1000金币", "1000金币",
-            "1000金币", "1000金币", "1000金币", "1000金币"};
-
+    private String[] titles = new String[]{"告白气球", "爱心", "飞船", "小星星",
+            "赞", "棒棒糖", "超跑", "甜甜圈"};
+    private String[] values = new String[]{"5200虎币", "10虎币", "26600虎币", "免费",
+            "500虎币", "1000虎币", "13140虎币", "2000虎币"};
 
 
     @Nullable
@@ -68,7 +67,7 @@ public class LiveGiftFragment extends NoBindFragment {
             giftBean.setValue(values[i]);
             giftBeanArrayList.add(giftBean);
         }
-        liveGiftAdapter = new LiveGiftAdapter(getContext(),giftBeanArrayList);
+        liveGiftAdapter = new LiveGiftAdapter(getContext(), giftBeanArrayList);
         mGridView.setAdapter(liveGiftAdapter);
     }
 
@@ -85,12 +84,12 @@ public class LiveGiftFragment extends NoBindFragment {
     }
 
 
-
     private boolean isActivityDestroyed() {
         if (getActivity() == null)
             return true;
         return getActivity().isDestroyed();
     }
+
     @Override
     public void onResume() {
         super.onResume();

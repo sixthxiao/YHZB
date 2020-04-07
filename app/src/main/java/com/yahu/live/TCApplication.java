@@ -31,32 +31,33 @@ import com.tencent.rtmp.TXLiveBase;
 
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.functions.Consumer;
+import io.reactivex.plugins.RxJavaPlugins;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- *
  * Module:   TCApplication
- *
+ * <p>
  * Function: 初始化 App 所需要的组件
- *
+ * <p>
  * 1. 【重要】初始化直播需要的 Licence : {@link TXLiveBase#setLicence(Context, String, String)}
- *
+ * <p>
  * 2. 初始化 App 用户逻辑管理类。
- *
+ * <p>
  * 3. 初始化 bugly 组件上报 crash。
- *
+ * <p>
  * 4. 初始化友盟分享组件，分享内容到 QQ 或 微信。
- *
+ * <p>
  * 5. 初始化小直播ELK上报数据系统，此系统用于 Demo 收集使用数据；您可以不关注相关代码。
  */
 public class TCApplication extends MultiDexApplication {
 
     /**
      * bugly 组件的 AppId
-     *
+     * <p>
      * bugly sdk 系腾讯提供用于 APP Crash 收集和分析的组件。
      */
     public static final String BUGLY_APPID = "1400012894";
@@ -134,6 +135,12 @@ public class TCApplication extends MultiDexApplication {
         Utils.init(this);
 
         initX5();
+        RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) {
+                //异常处理
+            }
+        });
     }
 
     private void initX5() {
@@ -199,13 +206,10 @@ public class TCApplication extends MultiDexApplication {
     private void initBuglyCrashReportSDK() {
         CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(getApplicationContext());
         strategy.setAppVersion(TXLiveBase.getSDKVersionStr());
-        //TODO
-        // 若您需要使用的话，请将 BUGLY_APPID 替换为您的 appid，否则会出现无法上报的问题。
         CrashReport.initCrashReport(getApplicationContext(), BUGLY_APPID, true, strategy);
     }
 
     /**
-     *
      * 初始化 ELK 数据上报：仅仅适用于数据收集上报，您可以不关注；或者将相关代码删除。
      */
     private void initXZBAppELKReport() {

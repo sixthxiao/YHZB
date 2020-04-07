@@ -16,15 +16,17 @@ import com.yahu.live.main.videolist.utils.TCVideoInfo;
 
 import java.util.ArrayList;
 
+
 /**
  *  Module:   TCVideoListAdapter
- *
  *  Function: 直播列表的Adapter
  *
  */
 public class TCVideoListAdapter extends ArrayAdapter<TCVideoInfo> {
+
     private int resourceId;
     private Activity mActivity;
+
     private class ViewHolder{
         TextView tvTitle;
         TextView tvHost;
@@ -40,7 +42,6 @@ public class TCVideoListAdapter extends ArrayAdapter<TCVideoInfo> {
         super(activity, R.layout.listview_video_item, objects);
         resourceId = R.layout.listview_video_item;
         mActivity = activity;
-
     }
 
     @Override

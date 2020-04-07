@@ -74,6 +74,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -89,9 +90,7 @@ public class HtmlActivity extends BaseActivity implements MyWebChomeClient.OpenF
     private WebView webView;
     private ProgressBar progressBar;
     private TitleBar titleBar;
-    private Boolean TAG = false;
     private String base_url;
-    private CustomNavigationJsObject customNavigationActivity;
     private SpUtils spUtils;
     private static final int REQUEST_PERMISSION_STORAGE = 0x01;
 
@@ -103,7 +102,6 @@ public class HtmlActivity extends BaseActivity implements MyWebChomeClient.OpenF
             Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
 
-    private Intent mSourceIntent;
     private ValueCallback<Uri> mUploadMsg;
     public ValueCallback<Uri[]> mUploadMsgForAndroid5;
 
@@ -116,6 +114,9 @@ public class HtmlActivity extends BaseActivity implements MyWebChomeClient.OpenF
 
     private int versionId = 0;
 
+    /**
+     * 支付宝支付结果回调
+     */
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @SuppressWarnings("unused")
@@ -139,8 +140,6 @@ public class HtmlActivity extends BaseActivity implements MyWebChomeClient.OpenF
 
     private IWXAPI iwxapi;
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,7 +151,6 @@ public class HtmlActivity extends BaseActivity implements MyWebChomeClient.OpenF
         webView = (WebView) findViewById(R.id.wv);
 //        appUtil = new AppUtilJSInterfaceX5(this, this, webView);
 //        adUtil = new AdUtilJSInterfaceX5(this, this, webView);
-        customNavigationActivity = new CustomNavigationJsObject(this);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         titleBar = findViewById(R.id.title_bar);
         titleBar.setTitle("雅虎金鸽");
@@ -187,11 +185,35 @@ public class HtmlActivity extends BaseActivity implements MyWebChomeClient.OpenF
 
                         Intent intent05 = new Intent(getApplicationContext(), TCLoginActivity.class);
                         intent05.putExtra("url", TCGlobalConfig.WEB_URL);
+                        //清除本地登录数据
+                        TCApplication.setUserInfo(new MixUserInfo());
+                        ConfigUtils.setUser(new MixUserInfo());
+                        CookieManager cookieManager = CookieManager.getInstance();
+                        cookieManager.removeAllCookie();
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            cookieManager.flush();
+                        } else {
+                            CookieSyncManager.createInstance(getApplicationContext());
+                            CookieSyncManager.getInstance().sync();
+                        }
+                        spUtils.put("LOGIN_STATE", "0");
                         startActivityForResult(intent05, TCGlobalConfig.RST_LOGIN);
                     } else if (url.toLowerCase().contains("passport/register")) {
 
                         Intent intent05 = new Intent(getApplicationContext(), TCLoginActivity.class);
                         intent05.putExtra("url", TCGlobalConfig.WEB_URL);
+
+                        TCApplication.setUserInfo(new MixUserInfo());
+                        ConfigUtils.setUser(new MixUserInfo());
+                        CookieManager cookieManager = CookieManager.getInstance();
+                        cookieManager.removeAllCookie();
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            cookieManager.flush();
+                        } else {
+                            CookieSyncManager.createInstance(getApplicationContext());
+                            CookieSyncManager.getInstance().sync();
+                        }
+                        spUtils.put("LOGIN_STATE", "0");
                         startActivityForResult(intent05, TCGlobalConfig.RST_LOGIN);
                         spUtils.put("yao_code_state", "1");
                     }
@@ -228,7 +250,6 @@ public class HtmlActivity extends BaseActivity implements MyWebChomeClient.OpenF
             return intent.getStringExtra("url");
         } else if (intent.getData() != null) {
             try {
-                TAG = true;
                 return new JSONObject(intent.getData().toString()).optJSONObject("n_extras").optString("url");
             } catch (Exception e) {
             }
@@ -265,8 +286,6 @@ public class HtmlActivity extends BaseActivity implements MyWebChomeClient.OpenF
     public void log(String tag) {
         Log.i("TAG", tag + "---------------");
     }
-
-
 
 
     @Override
@@ -315,23 +334,16 @@ public class HtmlActivity extends BaseActivity implements MyWebChomeClient.OpenF
         webSetting.setLoadsImagesAutomatically(true); //支持自动加载图片
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSetting.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-
         }
         webSetting.setDefaultTextEncodingName("utf-8");
 //        String ua = webSetting.getUserAgentString();
 //        webSetting.setUserAgentString("Android");
-
-
     }
 
     private void loadUrl() {
 
 //        setCookieToWebView();
         HashMap extraHeaders = getHeaders();
-//        if (customNavigationActivity != null && customNavigationActivity.getKey() != null) {
-//            extraHeaders.put(customNavigationActivity.getKey(), customNavigationActivity.getValue());
-//        }
-
         webView.loadUrl(base_url, extraHeaders);
     }
 
@@ -515,10 +527,6 @@ public class HtmlActivity extends BaseActivity implements MyWebChomeClient.OpenF
     }
 
 
-
-
-
-
     public boolean isAccept(@NonNull String[] permissions, @NonNull int[] grantResults) {
         for (int i = 0; i < grantResults.length; i++) {
             if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
@@ -532,6 +540,7 @@ public class HtmlActivity extends BaseActivity implements MyWebChomeClient.OpenF
 
     /**
      * 支付宝支付
+     *
      * @param orderInfo
      */
     private void aliPay(final String orderInfo) {
@@ -554,6 +563,7 @@ public class HtmlActivity extends BaseActivity implements MyWebChomeClient.OpenF
 
     /**
      * 微信支付
+     *
      * @param jsonObject
      */
     private void weChatPay(JSONObject jsonObject) {
@@ -571,6 +581,7 @@ public class HtmlActivity extends BaseActivity implements MyWebChomeClient.OpenF
         request.sign = jsonObject.optString("sign");
         iwxapi.sendReq(request);
     }
+
 
 }
 

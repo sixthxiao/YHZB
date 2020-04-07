@@ -8,12 +8,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.hardware.biometrics.BiometricPrompt;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.Handler;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -67,6 +72,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static android.Manifest.permission.USE_FINGERPRINT;
+
 /**
  * Module:   TCMainActivity
  * <p>
@@ -82,6 +89,8 @@ public class TCMainActivity extends FragmentActivity {
     private List<Fragment> fragmentList = new ArrayList<Fragment>();
     private TabLayout tab_layout;
     private SpUtils spUtils;
+
+                   //使用handler的Looper处理指纹识别硬件的信息；为null，则使用app的main Looper处理；
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -301,8 +310,6 @@ public class TCMainActivity extends FragmentActivity {
         return cachePath;
     }
 
-
-
     class UpdateAppHttpUtil implements HttpManager {
 
         @Override
@@ -373,7 +380,6 @@ public class TCMainActivity extends FragmentActivity {
                     });
         }
     }
-
 
     @Override
     protected void onResume() {
@@ -536,5 +542,16 @@ public class TCMainActivity extends FragmentActivity {
 //        public CharSequence getPageTitle(int position) {
 //            return strings[position];
 //        }
+    }
+
+
+    @RequiresPermission(USE_FINGERPRINT) //限定需要权限
+    public void authenticate(
+            @Nullable BiometricPrompt.CryptoObject crypto,             //加密类对象；
+            @Nullable CancellationSignal cancel,       //用来取消当前扫描操作（30s才超时）；
+            int flags,                                 //标识位，暂时设置为0即可；
+            @NonNull BiometricPrompt.AuthenticationCallback callback,  //认证结果回调；
+            @Nullable Handler handler){
+
     }
 }

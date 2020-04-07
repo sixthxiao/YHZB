@@ -1,5 +1,8 @@
 package com.yahu.live.audience;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -8,9 +11,13 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
@@ -20,11 +27,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.tencent.liteav.demo.beauty.BeautyPanel;
 import com.tencent.liteav.demo.beauty.BeautyParams;
 import com.yahu.liteav.demo.lvb.liveroom.IMLVBLiveRoomListener;
@@ -36,6 +45,7 @@ import com.yahu.live.R;
 import com.yahu.live.TCGlobalConfig;
 import com.yahu.live.common.report.TCELKReportMgr;
 import com.yahu.live.common.ui.ErrorDialogFragment;
+import com.yahu.live.common.widget.GiftDialog;
 import com.yahu.live.common.widget.beauty.LiveRoomBeautyKit;
 import com.yahu.live.common.utils.TCConstants;
 import com.yahu.live.common.utils.TCUtils;
@@ -54,6 +64,8 @@ import com.yahu.live.main.videolist.ui.TCVideoListFragment;
 import com.tencent.rtmp.TXLiveConstants;
 import com.tencent.rtmp.TXLog;
 import com.tencent.rtmp.ui.TXCloudVideoView;
+import com.yahu.live.utils.InstantMessageBeanMore;
+import com.yahu.live.utils.Util;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -67,93 +79,100 @@ import master.flame.danmaku.controller.IDanmakuView;
 
 /**
  * Module:   TCAudienceActivity
- *
+ * <p>
  * Function: 观众观看界面
- *
- *
+ * <p>
+ * <p>
  * 1. MLVB 观众开始和停止观看主播：{@link TCAudienceActivity#startPlay()} 和 {@link TCAudienceActivity#stopPlay()}
- *
+ * <p>
  * 2. MLVB 观众开始连麦和停止连麦：{@link TCAudienceActivity#startLinkMic()} 和 {@link TCAudienceActivity#stopLinkMic()}
- *
+ * <p>
  * 3. 房间消息、弹幕、点赞处理
- *
  **/
-public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListener, View.OnClickListener, TCInputTextMsgDialog.OnTextSendListener {
+public class TCAudienceActivity extends FragmentActivity implements IMLVBLiveRoomListener, View.OnClickListener, TCInputTextMsgDialog.OnTextSendListener, GiftDialog.OnGiftSendListener {
     private static final String TAG = TCAudienceActivity.class.getSimpleName();
     //连麦间隔控制
-    private static final long                   LINK_MIC_INTERVAL = 3 * 1000;
+    private static final long LINK_MIC_INTERVAL = 3 * 1000;
 
-    private Handler                             mHandler = new Handler(Looper.getMainLooper());
+    private Handler mHandler = new Handler(Looper.getMainLooper());
 
-
-    private TXCloudVideoView                    mTXCloudVideoView;      // 观看大主播的 View
+    private TXCloudVideoView mTXCloudVideoView;      // 观看大主播的 View
     private MLVBLiveRoom mLiveRoom;              // MLVB 组件
 
-
     // 消息相关
-    private TCInputTextMsgDialog                mInputTextMsgDialog;    // 消息输入框
-    private ListView                            mListViewMsg;           // 消息列表控件
-    private ArrayList<TCChatEntity>             mArrayListChatEntity = new ArrayList<>(); // 消息列表集合
-    private TCChatMsgListAdapter                mChatMsgListAdapter;    // 消息列表的Adapter
+    private TCInputTextMsgDialog mInputTextMsgDialog;    // 消息输入框
+    private ListView mListViewMsg;           // 消息列表控件
+    private ArrayList<TCChatEntity> mArrayListChatEntity = new ArrayList<>(); // 消息列表集合
+    private TCChatMsgListAdapter mChatMsgListAdapter;    // 消息列表的Adapter
 
-    private Button                              mBtnLinkMic;            // 连麦按钮
-    private Button                              mBtnSwitchCamera;       // 切换摄像头按钮
-    private ImageView                           mIvAvatar;              // 主播头像控件
-    private TextView                            mTvPusherName;          // 主播昵称控件
-    private TextView                            mMemberCount;           // 当前观众数量控件
+    private Button mBtnLinkMic;            // 连麦按钮
+    private Button mBtnSwitchCamera;       // 切换摄像头按钮
+    private ImageView mIvAvatar;              // 主播头像控件
+    private TextView mTvPusherName;          // 主播昵称控件
+    private TextView mMemberCount;           // 当前观众数量控件
 
-    private String                              mPusherAvatar;          // 主播头像连接地址
-    private long                                mCurrentAudienceCount;  // 当前观众数量
-    private long                                mHeartCount;            // 点赞数量
+    private String mPusherAvatar;          // 主播头像连接地址
+    private long mCurrentAudienceCount;  // 当前观众数量
+    private long mHeartCount;            // 点赞数量
 
-    private boolean                             mPlaying = false;       // 是否正在播放
-    private String                              mPusherNickname;        // 主播昵称
-    private String                              mPusherId;              // 主播id
-    private String                              mGroupId = "";          // 房间id
-    private String                              mUserId = "";           // 我的id
-    private String                              mNickname = "";         // 我的昵称
-    private String                              mAvatar = "";           // 我的头像
-    private String                              mFileId = "";
-    private String                              mTimeStamp = "";
+    private boolean mPlaying = false;       // 是否正在播放
+    private String mPusherNickname;        // 主播昵称
+    private String mPusherId;              // 主播id
+    private String mGroupId = "";          // 房间id
+    private String mUserId = "";           // 我的id
+    private String mNickname = "";         // 我的昵称
+    private String mAvatar = "";           // 我的头像
+    private String mFileId = "";
+    private String mTimeStamp = "";
 
     //头像列表控件
-    private RecyclerView                        mUserAvatarList;
-    private TCUserAvatarListAdapter             mAvatarListAdapter;
+    private RecyclerView mUserAvatarList;
+    private TCUserAvatarListAdapter mAvatarListAdapter;
 
     //点赞动画
-    private TCHeartLayout                       mHeartLayout;
+    private TCHeartLayout mHeartLayout;
 
     //点赞频率控制
-    private TCFrequeControl                     mLikeFrequeControl;
+    private TCFrequeControl mLikeFrequeControl;
 
     //弹幕
-    private TCDanmuMgr                          mDanmuMgr;
-    private IDanmakuView                        mDanmuView;
+    private TCDanmuMgr mDanmuMgr;
+    private IDanmakuView mDanmuView;
 
     //手势动画
-    private RelativeLayout                      mControlLayer;
-    private TCSwipeAnimationController          mTCSwipeAnimationController;
-    private ImageView                           mBgImageView;
+    private RelativeLayout mControlLayer;
+    private TCSwipeAnimationController mTCSwipeAnimationController;
+    private ImageView mBgImageView;
 
     //分享相关
-    private String                              mCoverUrl = "";
-    private String                              mTitle = ""; //标题
+    private String mCoverUrl = "";
+    private String mTitle = ""; //标题
 
     //log相关
-    private boolean                             mShowLog;
-    private boolean                             mIsBeingLinkMic;                    // 当前是否正在连麦
+    private boolean mShowLog;
+    private boolean mIsBeingLinkMic;                    // 当前是否正在连麦
 
     // 麦上主播相关
-    private List<AnchorInfo>                    mPusherList = new ArrayList<>();    // 麦上主播列表
-    private TCVideoViewMgr                      mVideoViewMgr;                      // 主播对应的视频View管理类
+    private List<AnchorInfo> mPusherList = new ArrayList<>();    // 麦上主播列表
+    private TCVideoViewMgr mVideoViewMgr;                      // 主播对应的视频View管理类
 
     //美颜
-    private BeautyPanel                         mBeautyControl;
+    private BeautyPanel mBeautyControl;
 
-    private ErrorDialogFragment                 mErrDlgFragment = new ErrorDialogFragment();
-    private long                                mStartPlayPts;
+    private ErrorDialogFragment mErrDlgFragment = new ErrorDialogFragment();
+    private long mStartPlayPts;
 
-    private long                                mLastLinkMicTime;   // 上次发起连麦的时间，用于频率控制
+    private long mLastLinkMicTime;   // 上次发起连麦的时间，用于频率控制
+
+    private GiftDialog giftDialog;    // 消息输入框
+    private RelativeLayout lin_gif;
+    private LinearLayout llWelcome;
+    private TextView tv_welcome_gif;
+    private ImageView iv_welcome_gif;
+    private AnimatorSet asHideThenShow;
+    private AnimatorSet asShow;
+    private List<InstantMessageBeanMore> welcomes = new ArrayList<>();
+    private long waitStartTime;
 
 
     @Override
@@ -245,7 +264,7 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
         mMemberCount = (TextView) findViewById(R.id.anchor_tv_member_counts);
 
         mCurrentAudienceCount++;
-        mMemberCount.setText(String.format(Locale.CHINA,"%d", mCurrentAudienceCount));
+        mMemberCount.setText(String.format(Locale.CHINA, "%d", mCurrentAudienceCount));
         mChatMsgListAdapter = new TCChatMsgListAdapter(this, mListViewMsg, mArrayListChatEntity);
         mListViewMsg.setAdapter(mChatMsgListAdapter);
 
@@ -293,14 +312,23 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
         mBeautyControl = (BeautyPanel) findViewById(R.id.beauty_panel);
 
         TCUtils.blurBgPic(this, mBgImageView, mCoverUrl, R.drawable.bg);
+
+        giftDialog = new GiftDialog(this);
+        giftDialog.setmOnGiftSendListener(this);
+
+        lin_gif = (RelativeLayout) findViewById(R.id.lin_gif);
+        llWelcome = (LinearLayout) findViewById(R.id.ll_welcome);
+        tv_welcome_gif = (TextView) findViewById(R.id.tv_welcome_gif);
+        iv_welcome_gif = (ImageView) findViewById(R.id.iv_welcome_gif);
+
     }
 
     /**
-     *     /////////////////////////////////////////////////////////////////////////////////
-     *     //
-     *     //                      生命周期相关
-     *     //
-     *     /////////////////////////////////////////////////////////////////////////////////
+     * /////////////////////////////////////////////////////////////////////////////////
+     * //
+     * //                      生命周期相关
+     * //
+     * /////////////////////////////////////////////////////////////////////////////////
      */
     @Override
     protected void onResume() {
@@ -337,16 +365,16 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
 
 
         long endPushPts = System.currentTimeMillis();
-        long diff = (endPushPts - mStartPlayPts) / 1000 ;
+        long diff = (endPushPts - mStartPlayPts) / 1000;
         TCELKReportMgr.getInstance().reportELK(TCConstants.ELK_ACTION_LIVE_PLAY_DURATION, TCUserMgr.getInstance().getUserId(), diff, "直播播放时长", null);
     }
 
     /**
-     *     /////////////////////////////////////////////////////////////////////////////////
-     *     //
-     *     //                      开始和停止播放相关
-     *     //
-     *     /////////////////////////////////////////////////////////////////////////////////
+     * /////////////////////////////////////////////////////////////////////////////////
+     * //
+     * //                      开始和停止播放相关
+     * //
+     * /////////////////////////////////////////////////////////////////////////////////
      */
     private void startPlay() {
         if (mPlaying) return;
@@ -375,7 +403,7 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
             mLiveRoom.exitRoom(new IMLVBLiveRoomListener.ExitRoomCallback() {
                 @Override
                 public void onError(int errCode, String errInfo) {
-                    TXLog.w(TAG, "exit room error : "+errInfo);
+                    TXLog.w(TAG, "exit room error : " + errInfo);
                 }
 
                 @Override
@@ -389,11 +417,11 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
     }
 
     /**
-     *     /////////////////////////////////////////////////////////////////////////////////
-     *     //
-     *     //                      发起和结束连麦
-     *     //
-     *     /////////////////////////////////////////////////////////////////////////////////
+     * /////////////////////////////////////////////////////////////////////////////////
+     * //
+     * //                      发起和结束连麦
+     * //
+     * /////////////////////////////////////////////////////////////////////////////////
      */
 
 
@@ -439,7 +467,7 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
 
             @Override
             public void onError(int code, String errInfo) {
-                Toast.makeText(TCAudienceActivity.this, "连麦请求发生错误，"+errInfo, Toast.LENGTH_SHORT).show();
+                Toast.makeText(TCAudienceActivity.this, "连麦请求发生错误，" + errInfo, Toast.LENGTH_SHORT).show();
                 hideNoticeToast();
                 mBtnLinkMic.setEnabled(true);
                 mBtnLinkMic.setBackgroundResource(R.drawable.linkmic_on);
@@ -518,11 +546,11 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
     }
 
     /**
-     *     /////////////////////////////////////////////////////////////////////////////////
-     *     //
-     *     //                      MLVB 回调
-     *     //
-     *     /////////////////////////////////////////////////////////////////////////////////
+     * /////////////////////////////////////////////////////////////////////////////////
+     * //
+     * //                      MLVB 回调
+     * //
+     * /////////////////////////////////////////////////////////////////////////////////
      */
 
     @Override
@@ -538,7 +566,7 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
 
         if (mPusherList != null) {
             boolean exist = false;
-            for (AnchorInfo item: mPusherList) {
+            for (AnchorInfo item : mPusherList) {
                 if (pusherInfo.userID.equalsIgnoreCase(item.userID)) {
                     exist = true;
                     break;
@@ -617,7 +645,7 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
 
     @Override
     public void onKickoutJoinAnchor() {
-        Toast.makeText(getApplicationContext(), "不好意思，您被主播踢开",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "不好意思，您被主播踢开", Toast.LENGTH_LONG).show();
         stopLinkMic();
     }
 
@@ -637,6 +665,15 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
         handleTextMsg(userInfo, message);
     }
 
+    /**
+     * 接收消息
+     * @param roomID        房间 ID
+     * @param userID        发送者 ID
+     * @param userName      发送者昵称
+     * @param userAvatar    发送者头像
+     * @param cmd           自定义 cmd
+     * @param message       自定义消息内容
+     */
     @Override
     public void onRecvRoomCustomMsg(String roomID, String userID, String userName, String userAvatar, String cmd, String message) {
         TCSimpleUserInfo userInfo = new TCSimpleUserInfo(userID, userName, userAvatar);
@@ -657,11 +694,14 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
             case TCConstants.IMCMD_DANMU:
                 handleDanmuMsg(userInfo, message);
                 break;
+            case TCConstants.GIFT_MESSAGE:// 礼物消息
+
+                handleGiftMsg(userInfo, message);
+                break;
             default:
                 break;
         }
     }
-
 
 
     @Override
@@ -716,7 +756,7 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
             return;
 
         mCurrentAudienceCount++;
-        mMemberCount.setText(String.format(Locale.CHINA,"%d", mCurrentAudienceCount));
+        mMemberCount.setText(String.format(Locale.CHINA, "%d", mCurrentAudienceCount));
 
         //左下角显示用户加入消息
         TCChatEntity entity = new TCChatEntity();
@@ -735,12 +775,12 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
      * @param userInfo
      */
     public void handleAudienceQuitMsg(TCSimpleUserInfo userInfo) {
-        if(mCurrentAudienceCount > 0)
+        if (mCurrentAudienceCount > 0)
             mCurrentAudienceCount--;
         else
             Log.d(TAG, "接受多次退出请求，目前人数为负数");
 
-        mMemberCount.setText(String.format(Locale.CHINA,"%d", mCurrentAudienceCount));
+        mMemberCount.setText(String.format(Locale.CHINA, "%d", mCurrentAudienceCount));
 
         mAvatarListAdapter.removeItem(userInfo.userid);
 
@@ -800,7 +840,6 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
         entity.setSenderName(userInfo.nickname);
         entity.setContent(text);
         entity.setType(TCConstants.TEXT_TYPE);
-
         notifyMsg(entity);
     }
 
@@ -814,10 +853,8 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                if (mArrayListChatEntity.size() > 1000)
-                {
-                    while (mArrayListChatEntity.size() > 900)
-                    {
+                if (mArrayListChatEntity.size() > 1000) {
+                    while (mArrayListChatEntity.size() > 900) {
                         mArrayListChatEntity.remove(0);
                     }
                 }
@@ -837,8 +874,8 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
         stopPlay();
 
         Intent rstData = new Intent();
-        rstData.putExtra(TCConstants.ACTIVITY_RESULT,errorMsg);
-        setResult(TCVideoListFragment.START_LIVE_PLAY,rstData);
+        rstData.putExtra(TCConstants.ACTIVITY_RESULT, errorMsg);
+        setResult(TCVideoListFragment.START_LIVE_PLAY, rstData);
 
         if (!mErrDlgFragment.isAdded() && !this.isFinishing()) {
             Bundle args = new Bundle();
@@ -855,11 +892,11 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
 
 
     /**
-     *     /////////////////////////////////////////////////////////////////////////////////
-     *     //
-     *     //                       点击事件
-     *     //
-     *     /////////////////////////////////////////////////////////////////////////////////
+     * /////////////////////////////////////////////////////////////////////////////////
+     * //
+     * //                       点击事件
+     * //
+     * /////////////////////////////////////////////////////////////////////////////////
      */
     @Override
     public void onClick(View v) {
@@ -867,10 +904,10 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
             case R.id.btn_back:
                 Intent rstData = new Intent();
                 long memberCount = mCurrentAudienceCount - 1;
-                rstData.putExtra(TCConstants.MEMBER_COUNT, memberCount>=0 ? memberCount:0);
+                rstData.putExtra(TCConstants.MEMBER_COUNT, memberCount >= 0 ? memberCount : 0);
                 rstData.putExtra(TCConstants.HEART_COUNT, mHeartCount);
                 rstData.putExtra(TCConstants.PUSHER_ID, mPusherId);
-                setResult(0,rstData);
+                setResult(0, rstData);
                 stopPlay();
                 finish();
                 break;
@@ -878,7 +915,6 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
                 if (mHeartLayout != null) {
                     mHeartLayout.addFavor();
                 }
-
                 //点赞发送请求限制
                 if (mLikeFrequeControl == null) {
                     mLikeFrequeControl = new TCFrequeControl();
@@ -894,21 +930,45 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
             case R.id.btn_message_input:
                 showInputMsgDialog();
                 break;
-            case R.id.btn_share:
+            case R.id.btn_share: //分享
                 break;
             case R.id.btn_log:
                 showLog();
-            break;
+                break;
             case R.id.record:
                 break;
             case R.id.retry_record:
                 break;
             case R.id.close_record:
                 break;
+            case R.id.btn_gift:
+                showGiftDialog();
+                break;
             default:
                 break;
         }
     }
+
+    /**
+     * 礼物弹窗
+     */
+    protected void showGiftDialog() {
+        //确认则显示观看detail
+//        GiftDialog dialogFragment = new GiftDialog(context);
+        Bundle args = new Bundle();
+//        args.putString("time", TCUtils.formattedTime(mSecond));
+//        args.putString("heartCount", String.format(Locale.CHINA, "%d", mHeartCount));
+//        args.putString("totalMemberCount", String.format(Locale.CHINA, "%d", mTotalMemberCount));
+        giftDialog.setArguments(args);
+        giftDialog.setCancelable(false);
+        if (giftDialog.isAdded())
+            giftDialog.dismiss();
+        else
+            giftDialog.show(getSupportFragmentManager(), "");
+
+    }
+
+
 
     private void showLog() {
         mShowLog = !mShowLog;
@@ -948,9 +1008,11 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
         mInputTextMsgDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         mInputTextMsgDialog.show();
     }
+
     /**
      * TextInputDialog发送回调
-     * @param msg 文本信息
+     *
+     * @param msg       文本信息
      * @param danmuOpen 是否打开弹幕
      */
     @Override
@@ -982,7 +1044,7 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
             mLiveRoom.sendRoomCustomMsg(String.valueOf(TCConstants.IMCMD_DANMU), msg, new IMLVBLiveRoomListener.SendRoomCustomMsgCallback() {
                 @Override
                 public void onError(int errCode, String errInfo) {
-                    Log.w(TAG, "sendRoomDanmuMsg error: "+errInfo);
+                    Log.w(TAG, "sendRoomDanmuMsg error: " + errInfo);
                 }
 
                 @Override
@@ -1006,13 +1068,12 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
     }
 
 
-
     /**
-     *     /////////////////////////////////////////////////////////////////////////////////
-     *     //
-     *     //                      弹窗消息
-     *     //
-     *     /////////////////////////////////////////////////////////////////////////////////
+     * /////////////////////////////////////////////////////////////////////////////////
+     * //
+     * //                      弹窗消息
+     * //
+     * /////////////////////////////////////////////////////////////////////////////////
      */
 
     private Toast mNoticeToast;
@@ -1024,7 +1085,7 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
         }
 
         if (mNoticeTimer == null) {
-            mNoticeTimer = new  Timer();
+            mNoticeTimer = new Timer();
         }
 
         mNoticeToast.setText(text);
@@ -1049,11 +1110,11 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
     }
 
     /**
-     *     /////////////////////////////////////////////////////////////////////////////////
-     *     //
-     *     //                      权限管理
-     *     //
-     *     /////////////////////////////////////////////////////////////////////////////////
+     * /////////////////////////////////////////////////////////////////////////////////
+     * //
+     * //                      权限管理
+     * //
+     * /////////////////////////////////////////////////////////////////////////////////
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -1081,32 +1142,173 @@ public class TCAudienceActivity extends Activity implements IMLVBLiveRoomListene
      */
     /**
      * 小直播ELK上报内容
+     *
      * @param event
      */
     private void report(int event) {
         switch (event) {
-            case TXLiveConstants.PLAY_EVT_RCV_FIRST_I_FRAME :
+            case TXLiveConstants.PLAY_EVT_RCV_FIRST_I_FRAME:
                 TCELKReportMgr.getInstance().reportELK(TCConstants.ELK_ACTION_LIVE_PLAY, TCUserMgr.getInstance().getUserId(), 0, "视频播放成功", null);
                 break;
-            case TXLiveConstants.PLAY_ERR_NET_DISCONNECT :
+            case TXLiveConstants.PLAY_ERR_NET_DISCONNECT:
                 TCELKReportMgr.getInstance().reportELK(TCConstants.ELK_ACTION_LIVE_PLAY, TCUserMgr.getInstance().getUserId(), -1, "网络断连,且经多次重连抢救无效,可以放弃治疗,更多重试请自行重启播放", null);
                 break;
-            case TXLiveConstants.PLAY_ERR_GET_RTMP_ACC_URL_FAIL :
+            case TXLiveConstants.PLAY_ERR_GET_RTMP_ACC_URL_FAIL:
                 TCELKReportMgr.getInstance().reportELK(TCConstants.ELK_ACTION_LIVE_PLAY, TCUserMgr.getInstance().getUserId(), -2, "获取加速拉流地址失败", null);
                 break;
-            case TXLiveConstants.PLAY_ERR_FILE_NOT_FOUND :
+            case TXLiveConstants.PLAY_ERR_FILE_NOT_FOUND:
                 TCELKReportMgr.getInstance().reportELK(TCConstants.ELK_ACTION_LIVE_PLAY, TCUserMgr.getInstance().getUserId(), -3, "播放文件不存在", null);
                 break;
-            case TXLiveConstants.PLAY_ERR_HEVC_DECODE_FAIL :
+            case TXLiveConstants.PLAY_ERR_HEVC_DECODE_FAIL:
                 TCELKReportMgr.getInstance().reportELK(TCConstants.ELK_ACTION_LIVE_PLAY, TCUserMgr.getInstance().getUserId(), -4, "H265解码失败", null);
                 break;
-            case TXLiveConstants.PLAY_ERR_HLS_KEY :
+            case TXLiveConstants.PLAY_ERR_HLS_KEY:
                 TCELKReportMgr.getInstance().reportELK(TCConstants.ELK_ACTION_LIVE_PLAY, TCUserMgr.getInstance().getUserId(), -5, "HLS解码Key获取失败", null);
                 break;
-            case TXLiveConstants.PLAY_ERR_GET_PLAYINFO_FAIL :
+            case TXLiveConstants.PLAY_ERR_GET_PLAYINFO_FAIL:
                 TCELKReportMgr.getInstance().reportELK(TCConstants.ELK_ACTION_LIVE_PLAY, TCUserMgr.getInstance().getUserId(), -6, "获取点播文件信息失败", null);
                 break;
 
         }
     }
+
+    @Override
+    public void onGiftSend(String msg) {
+        if (msg.length() == 0)
+            return;
+        try {
+            byte[] byte_num = msg.getBytes("utf8");
+            if (byte_num.length > 160) {
+                Toast.makeText(this, "请选择赠送的礼物", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return;
+        }
+        mLiveRoom.sendRoomCustomMsg(String.valueOf(TCConstants.GIFT_MESSAGE), msg, new SendRoomCustomMsgCallback() {
+            @Override
+            public void onError(int errCode, String errInfo) {
+                Log.w(TAG, "sendRoomDanmuMsg error: " + errInfo);
+            }
+
+            @Override
+            public void onSuccess() {
+                Log.d(TAG, "sendRoomDanmuMsg success");
+            }
+        });
+    }
+
+    private Animator.AnimatorListener welcomeListener = new Animator.AnimatorListener() {
+        @Override
+        public void onAnimationStart(Animator animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animator animation) {
+            if (welcomes.size() == 0) {
+                llWelcome.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (asShow != null && asShow.isRunning())
+                            return;
+                        if (asHideThenShow != null && asHideThenShow.isRunning())
+                            return;
+                        if (welcomes.size() > 0)
+                            return;
+                        if (System.currentTimeMillis() - waitStartTime < 2500)
+                            return;
+                        llWelcome.setAlpha(0);
+                    }
+                }, 3000);//3000
+                waitStartTime = System.currentTimeMillis();
+            } else {
+                playAnim();
+            }
+        }
+
+        @Override
+        public void onAnimationCancel(Animator animation) {
+
+        }
+
+        @Override
+        public void onAnimationRepeat(Animator animation) {
+
+        }
+    };
+
+    private void playAnim() {
+        if (llWelcome.getAlpha() == 1) {
+            if (asHideThenShow == null) {
+                ObjectAnimator alphaHide = ObjectAnimator.ofFloat(llWelcome, "alpha", 1f, 0f).setDuration(300);
+                alphaHide.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                ObjectAnimator alphaShow = ObjectAnimator.ofFloat(llWelcome, "alpha", 0f, 1f).setDuration(10);
+                ObjectAnimator translateAnimator = ObjectAnimator.ofFloat(llWelcome, "translationX", Util.dip2px(-200), Util.dip2px(10)).setDuration(300);
+                asHideThenShow = new AnimatorSet();
+                asHideThenShow.playSequentially(alphaHide, alphaShow, translateAnimator);
+                asHideThenShow.addListener(welcomeListener);
+            }
+            if (!asHideThenShow.isRunning())
+                asHideThenShow.start();
+        } else {
+            setWelcome();
+            if (asShow == null) {
+                ObjectAnimator alphaShow = ObjectAnimator.ofFloat(llWelcome, "alpha", 0f, 1f).setDuration(10);
+                ObjectAnimator translateAnimator = ObjectAnimator.ofFloat(llWelcome, "translationX", Util.dip2px(-200), Util.dip2px(10)).setDuration(300);
+                asShow = new AnimatorSet();
+                asShow.playSequentially(alphaShow, translateAnimator);
+                asShow.addListener(welcomeListener);
+            }
+            if (!asShow.isRunning())
+                asShow.start();
+        }
+    }
+
+    private void setWelcome() {
+        if (welcomes.size() > 0) {
+            InstantMessageBeanMore messageBean = welcomes.get(0);
+            lin_gif.setVisibility(View.VISIBLE);
+            Glide.with(this).load(messageBean.gradeIcon).into(iv_welcome_gif); //加载一次
+
+            String messgae = String.format("欢迎" + "<font color='#FFF17A'> %s </font>" + "进入直播间", messageBean.userName);
+            tv_welcome_gif.setText(Html.fromHtml(messgae));
+            welcomes.remove(messageBean);
+        }
+
+    }
+
+    /**
+     * 接收礼物消息
+     *
+     * @param userInfo
+     * @param title
+     */
+    protected void handleGiftMsg(TCSimpleUserInfo userInfo, String title) {
+        InstantMessageBeanMore messageBeanmore = new InstantMessageBeanMore(title,userInfo.nickname);
+        welcomes.add(messageBeanmore);
+        playAnim();
+    }
+
 }
